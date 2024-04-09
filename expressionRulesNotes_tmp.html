@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>expressionRulesNotes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="rules-for-expressions-in-ml">Rules for Expressions in ML</h1>
+<h2 id="the-why">The Why?</h2>
+<p>When we learn the sematics we can build upon them to reason with more complex ideas and expressions</p>
+<h3 id="expressions">Expressions</h3>
+<p>Every expression has the following</p>
+<ul>
+<li>Syntax</li>
+<li>Type Checking rules
+<ul>
+<li>Produces a type or fails</li>
+</ul>
+</li>
+<li>Evaluation rules (only on things that type checks)
+<ul>
+<li>Produces a <strong>value</strong> or <strong>exception</strong> or <strong>infinite loop</strong></li>
+</ul>
+</li>
+</ul>
+<p>There is a constant <em>true</em> just like there is a constant <em>34</em>.
+Conditional expressions will evaluate to <em>true/false</em>.</p>
+<p>There are three questions I need to ask when looking at an expression</p>
+<ol>
+<li>What is the <em>syntax</em>? (ie how do you write it down)</li>
+<li>What are the type checking rules. (what will cause it to fail to type check)</li>
+<li>What are the evaluation rules assuming it does type check. (How does it perform its computation in order to produce a result).
+<ol>
+<li>Expression dont always have to produce a result, sometimes they raise an exception or loop infinitely.</li>
+</ol>
+</li>
+</ol>
+<h3 id="variables">Variables</h3>
+<ul>
+<li>
+<p>Syntax: any sequence of digits or letters or underscore ( _ ). <strong>Cant start with a digit</strong></p>
+</li>
+<li>
+<p>Type-Checking: Applies only when were using a variable not defining it: We look up the type in the <strong>static</strong> environment. <strong>Fails if its not there</strong></p>
+</li>
+<li>
+<p>Evaluation: Look up the value in the <strong>dynamic</strong> environment.</p>
+</li>
+</ul>
+<p>Only type-checked variables are evaluated in ML</p>
+<h3 id="addition">Addition</h3>
+<ul>
+<li>Syntax: Any <em>expression</em> where you have other <em>expressions</em> with a <em>plus</em> symbol in between them.
+ie: <code>e1 + e2</code> where <code>e1</code> and <code>e2</code> are expressions with <code>+</code> in between them</li>
+<li>Type-Checking: You have to type check both the sub expressions
+<ul>
+<li>Fails: If either variable doesn't type check. Has a type other than int or dont both have the same type.
+if <code>e1</code> and <code>e2</code> have type <code>int</code> then <strong><code>e1 + e2</code></strong> has type <strong><code>int</code></strong></li>
+</ul>
+</li>
+<li>Evaluation: Evaluates both expression. Sum the evaluated expressions.
+<ul>
+<li><code>e1</code> and <code>e2</code> evaluates to <em>v1</em> and <em>v2</em> and <code>e1+e2</code> will evaluate to the <em>sum</em> of <em>v1</em> and <em>v2</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="values">Values</h3>
+<p>The result of evaluating something is a value, every value is an expression. ie 34 is an expression that represent itself (think of 0s and 1s)
+Not all expressions are values.
+Every value evaluates to itself in &quot;zero steps&quot;.
+<strong>For each of these types, there are a certain set of values</strong>.</p>
+<ul>
+<li>34,17,42 have a type <em>int</em></li>
+<li>true, false have type <em>bool</em></li>
+<li>() have type <em>unit</em></li>
+</ul>
+<p>They're the answers that we get when we have an expression of that type.</p>
+<h3 id="conditional-expressions">Conditional Expressions</h3>
+<ul>
+<li>Syntax: A conditional expression contains the keywords <em>if</em> <em>then</em> and <em>else</em>
+ie: <code>if e1 then e2 else e3</code>
+Where <code>e1 e2 e3</code> are subexpressions</li>
+<li>Type-Checking:
+<ol>
+<li>The expression after the <em>if</em> must have a type of <strong>boolean</strong>,</li>
+<li>The expressions after the <em>then</em> and the <em>else</em> must have the <strong>same type</strong>. type <em>t</em></li>
+<li>The <strong>entire</strong> conditional is the type of the expression after <em>then</em> and <em>else</em>. type <em>t</em>
+In <code>if e1 then e2 else e3</code>
+<ul>
+<li><code>e1</code> must be type bool</li>
+<li><code>e2 e3</code> must have the same type</li>
+<li><code>if e1 then e2 else e3</code> is type <code>e2 e3</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>Evaluation:
+<ol>
+<li>the expression after the <em>if</em> is evaluated, since its a bool it will be either <em>true or false</em></li>
+<li>if true then the entire expression evaluates to the evaluation of the expression after the <em>then</em></li>
+<li>if false then the entire expression evaluates to the evaluation of the expression after the <em>else</em></li>
+</ol>
+</li>
+</ul>
+<h3 id="less-than-comparison">Less than comparison</h3>
+<ul>
+<li>Syntax: Two expressions seperated by <code>&lt;</code>.
+<ul>
+<li>ie <code>e1 &lt; e2</code></li>
+</ul>
+</li>
+<li>Type-Check: you have to type check both sub expressions
+<ul>
+<li>Fails: If either variables doesnt type check, or has a type other than <code>int</code> and arent the same type</li>
+<li>if <code>e1</code> and <code>e2</code> has both type <code>int</code> then <code>e1 &lt; e2</code> has a type <code>bool</code></li>
+</ul>
+</li>
+<li>Evaluation: Evaluate the two expressions to two values, if v1 is less then v2 then the entire expression evaluates to true, evaluates to false otherwise.</li>
+</ul>
+
+</body>
+</html>
