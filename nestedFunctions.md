@@ -4,7 +4,7 @@ Using let expressions we can define functions inside any let-expression, thats b
 
 `let b1 b2...bn in e end`
 
-## nested functions example
+## Nested functions example
 
     fun count_from1 (x:int) =
         let fun count(from:int, to:int)=
